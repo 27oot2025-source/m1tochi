@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВЕКТОР-9 // CYBERDECK SYSTEMS — 2087</title>
+<meta name="description" content="ВЕКТОР-9 SYSTEMS — кибердеки, нейроинтерфейсы, ледоколы для ICE. Будущее уже случилось вчера.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=PT+Mono&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%230a0414'/><text x='2' y='13' font-size='12' fill='%23ff2079'>V</text></svg>">
+</head>
+<body class="theme-magenta">
+
+<!-- ============ BOOT SEQUENCE ============ -->
+<div id="boot" aria-hidden="true">
+  <div class="boot-inner">
+    <pre id="boot-log"></pre>
+    <div class="boot-skip">[ КЛИК — ПРОПУСТИТЬ ]</div>
+  </div>
+</div>
+
+<!-- ============ CRT / GLITCH LAYERS ============ -->
+<div class="crt-scanlines" aria-hidden="true"></div>
+<div class="crt-vignette" aria-hidden="true"></div>
+<div class="crt-noise" aria-hidden="true"></div>
+<div id="channel-flash" aria-hidden="true"></div>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <a class="logo glitch" href="#/home" data-text="ВЕКТОР-9">
+    <span class="led led-red blink-fast"></span>
+    <span class="logo-text">ВЕКТОР-9</span>
+    <span class="logo-sub">CYBERDECK&nbsp;SYSTEMS</span>
+  </a>
+
+  <nav class="nav" id="nav">
+    <a href="#/home"      data-route="home"      class="nav-link">Главная</a>
+    <a href="#/products"  data-route="products"  class="nav-link">Продукция</a>
+    <a href="#/datanet"   data-route="datanet"   class="nav-link">Датанет</a>
+    <a href="#/terminal"  data-route="terminal"  class="nav-link">Терминал</a>
+    <a href="#/corp"      data-route="corp"      class="nav-link">Корп</a>
+    <a href="#/contact"   data-route="contact"   class="nav-link">Связь</a>
+  </nav>
+
+  <div class="header-right">
+    <button class="hud-btn" id="sound-toggle" title="Звук интерфейса">SFX:<b id="sound-state">ВКЛ</b></button>
+    <button class="hud-btn" id="crt-toggle" title="CRT-эффект">CRT:<b id="crt-state">ВКЛ</b></button>
+    <button class="hud-btn cart-btn" id="cart-open" title="Память заказов">
+      КОРЗИНА [<b id="cart-count">0</b>]
+    </button>
+    <div class="clock">
+      <div id="clock-date">--.--.2087</div>
+      <div id="clock-time">--:--:--</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker-track"></div>
+</div>
+
+<main id="main">
+
+<!-- ============ ROUTE: HOME ============ -->
+<section class="route active" id="route-home">
+  <div class="hero">
+    <div class="hero-sky" aria-hidden="true">
+      <div class="sun"></div>
+      <div class="grid-floor"></div>
+      <div class="hero-stars"></div>
+    </div>
+
+    <div class="hero-content">
+      <pre class="ascii-logo" aria-hidden="true">
+██╗   ██╗███████╗ ██████╗████████╗ ██████╗ ██████╗
+██║   ██║██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗
+██║   ██║█████╗  ██║        ██║   ██║   ██║██████╔╝
+╚██╗ ██╔╝██╔══╝  ██║        ██║   ██║   ██║██╔══██╗
+ ╚████╔╝ ███████╗╚██████╗   ██║   ╚██████╔╝██║  ██║
+  ╚═══╝  ╚══════╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝</pre>
+
+      <h1 class="hero-title glitch" data-text="БУДУЩЕЕ УЖЕ СЛУЧИЛОСЬ ВЧЕРА">БУДУЩЕЕ УЖЕ СЛУЧИЛОСЬ ВЧЕРА</h1>
+      <p class="hero-sub">
+        Кибердеки. Нейроинтерфейсы. Ледоколы против ICE.<br>
+        Корпорация <b>ВЕКТОР-9</b> строит киберпространство с <b>1987</b> года.
+      </p>
+      <div class="hero-cta">
+        <a href="#/products" class="btn btn-primary">КАТАЛОГ // СЕРИЯ 2087</a>
+        <a href="#/terminal" class="btn btn-ghost">ОТКРЫТЬ ТЕРМИНАЛ_</a>
+      </div>
+      <div class="hero-warn blink-slow">
+        ⚠ КОНТРАБАНДА BLACK ICE КАРАЕТСЯ ПО ЗАКОНУ 2087-12 ⚠
+      </div>
+    </div>
+
+    <div class="stats-panel">
+      <div class="stat">
+        <div class="stat-num" id="stat-nodes">4096</div>
+        <div class="stat-label"><span class="led blink-fast"></span>УЗЛОВ В СЕТИ</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-uptime">00:00:00</div>
+        <div class="stat-label"><span class="led blink-slow"></span>СЕАНС</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-clients">984317</div>
+        <div class="stat-label"><span class="led blink-fast"></span>РАННЕРОВ ОНЛАЙН</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num danger" id="stat-ice">0</div>
+        <div class="stat-label"><span class="led led-red blink-fast"></span>BLACK ICE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-blocks">
+    <article class="home-block">
+      <h3>▙ 01 // ЖЕЛЕЗО</h3>
+      <p>Флагманская дека <b>VK-9 «НОЧНОЙ БЕГЕМОТ»</b> — 40 МГц чистой злобы, 16 Мб памяти
+      и модем, который открывает двери, о которых государство предпочитает молчать.</p>
+      <a class="btn btn-mini" href="#/products">В КАТАЛОГ →</a>
+    </article>
+    <article class="home-block">
+      <h3>▙ 02 // СВЕЖИЕ ДАННЫЕ</h3>
+      <p>Датанет-лентa: дроны почты ушли в забастовку, рынок ICE растёт на 12%,
+      а корп «АНКАРА-ЧИП» опять утверждает, что их стену не взломать. Ха.</p>
+      <a class="btn btn-mini" href="#/datanet">ЧИТАТЬ ЛЕНТУ →</a>
+    </article>
+    <article class="home-block">
+      <h3>▙ 03 // ДОСТУП</h3>
+      <p>Гостевой доступ к терминалу открыт. Команды: <code>help</code>, <code>catalog</code>,
+      <code>hack</code>, <code>color</code>. Осторожно: терминал кусается.</p>
+      <a class="btn btn-mini" href="#/terminal">GUEST@V9:~$ →</a>
+    </article>
+  </div>
+</section>
+
+<!-- ============ ROUTE: PRODUCTS ============ -->
+<section class="route" id="route-products">
+  <header class="page-head">
+    <h2 class="page-title glitch" data-text="ПРОДУКЦИЯ // СЕРИЯ 2087">ПРОДУКЦИЯ // СЕРИЯ 2087</h2>
+    <p class="page-sub">ОПЛАТА: КРЕДИТЫ, КРИПТОНАЛИЧНЫЕ, ДУШИ (ОПТОМ). ДОСТАВКА ДРОНОМ — 40 МИНУТ.</p>
+  </header>
+
+  <div class="product-grid" id="product-grid">
+
+    <article class="product-card">
+      <div class="product-img">
+        <img src="assets/products/deck9.jpg" alt="Кибердека VK-9 Ночной Бегемот" loading="lazy">
+        <span class="product-id">V9-001</span>
+        <span class="product-tag">ФЛАГМАН</span>
+      </div>
+      <div class="product-body">
+        <h3>VK-9 «НОЧНОЙ БЕГЕМОТ»</h3>
+        <p class="product-desc">Флагманская кибердека для ночных вылазок в киберпространство. Греет руки. И города.</p>
+        <ul class="spec-list">
+          <li>▸ Процессор Zilog Z-80000 @ 40 МГц</li>
+          <li>▸ ОЗУ 16 Мб, кассетный кэш 128 Кб</li>
+          <li>▸ Модем 9600 бод, автоскрэмблер</li>
+          <li>▸ Встроенный ICE «МОЛНИЯ-3»</li>
+        </ul>
+        <div class="product-foot">
+          <span class="price">12 400 <small>кр.</small></span>
+          <button class="btn btn-buy" data-name="VK-9 «НОЧНОЙ БЕГЕМОТ»" data-price="12400">В КОРЗИНУ</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card">
+      <div class="product-img">
+        <img src="assets/products/kortex.jpg" alt="Нейроинтерфейс Кортекс Link v3" loading="lazy">
+        <span class="product-id">V9-002</span>
+      </div>
+      <div class="product-body">
+        <h3>«КОРТЕКС LINK v3»</h3>
+        <p class="product-desc">Нейроинтерфейс-повязка. 256 электродов читают мысли быстрее, чем вы их придумываете.</p>
+        <ul class="spec-list">
+          <li>▸ Задержка: 4 мс (терпимо)</li>
+          <li>▸ 256 активных электродов</li>
+          <li>▸ Режим «ТИШИНА» для параноиков</li>
+          <li>▸ Гарантия 2 года на кору</li>
+        </ul>
+        <div class="product-foot">
+          <span class="price">7 800 <small>кр.</small></span>
+          <button class="btn btn-buy" data-name="«КОРТЕКС LINK v3»" data-price="7800">В КОРЗИНУ</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card">
+      <div class="product-img">
+        <img src="assets/products/pauk.jpg" alt="Киберпротез Титан Паук" loading="lazy">
+        <span class="product-id">V9-003</span>
+      </div>
+      <div class="product-body">
+        <h3>«ТИТАН ПАУК»</h3>
+        <p class="product-desc">Киберпротез предплечья. Открывает банки, банки с огурцами и плохо закрытые двери.</p>
+        <ul class="spec-list">
+          <li>▸ Сила хвата: 900 кг</li>
+          <li>▸ Титановая рама, покрытие «Хром»</li>
+          <li>▸ Мультитул: 14 насадок</li>
+          <li>▸ Не ржавеет. Ну, почти</li>
+        </ul>
+        <div class="product-foot">
+          <span class="price">15 900 <small>кр.</small></span>
+          <button class="btn btn-buy" data-name="«ТИТАН ПАУК»" data-price="15900">В КОРЗИНУ</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card">
+      <div class="product-img">
+        <img src="assets/products/ledokol.jpg" alt="Чип Ледокол-2" loading="lazy">
+        <span class="product-id">V9-004</span>
+        <span class="product-tag tag-danger">ОГРАНИЧЕН</span>
+      </div>
+      <div class="product-body">
+        <h3>«ЛЕДОКОЛ-2»</h3>
+        <p class="product-desc">Чип-взломщик ICE. 64-битный лёд вскрывает за 1.2 секунды. Запрещён в 14 странах из 14 опрошенных.</p>
+        <ul class="spec-list">
+          <li>▸ Взлом ICE-64: 1.2 с</li>
+          <li>▸ Пассивное охлаждение (ирония)</li>
+          <li>▸ Самоуничтожение при аресте</li>
+          <li>▸ Инструкция: не инструкция</li>
+        </ul>
+        <div class="product-foot">
+          <span class="price">4 200 <small>кр.</small></span>
+          <button class="btn btn-buy" data-name="«ЛЕДОКОЛ-2»" data-price="4200">В КОРЗИНУ</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card">
+      <div class="product-img">
+        <img src="assets/products/sova.jpg" alt="Оптика Сова" loading="lazy">
+        <span class="product-id">V9-005</span>
+      </div>
+      <div class="product-body">
+        <h3>Оптика «СОВА»</h3>
+        <p class="product-desc">Оптический имплант ночного видения. Видит в темноте. Видит сквозь стены. Видит ваши оправдания.</p>
+        <ul class="spec-list">
+          <li>▸ Усиление света ×4000</li>
+          <li>▸ Режимы: ИК / УФ / РЕНТГЕН*</li>
+          <li>▸ Автофокус 0.03 с</li>
+          <li>▸ *рентаген — шутка. Может быть</li>
+        </ul>
+        <div class="product-foot">
+          <span class="price">3 600 <small>кр.</small></span>
+          <button class="btn btn-buy" data-name="Оптика «СОВА»" data-price="3600">В КОРЗИНУ</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card">
+      <div class="product-img">
+        <img src="assets/products/aura.jpg" alt="Портативная дека Аура-2000" loading="lazy">
+        <span class="product-id">V9-006</span>
+        <span class="product-tag">РЕТРО</span>
+      </div>
+      <div class="product-body">
+        <h3>«АУРА-2000»</h3>
+        <p class="product-desc">Портативная синтезатор-дека с кассетной памятью. Для раннеров, которые ценят стиль и аналоговый тёплый звук.</p>
+        <ul class="spec-list">
+          <li>▸ 8-битный звук, 4 канала</li>
+          <li>▸ Кассетная память 60 мин</li>
+          <li>▸ MIDI-выход в киберпространство</li>
+          <li>▸ Ремешок. Нейлон. Люкс</li>
+        </ul>
+        <div class="product-foot">
+          <span class="price">2 400 <small>кр.</small></span>
+          <button class="btn btn-buy" data-name="«АУРА-2000»" data-price="2400">В КОРЗИНУ</button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <p class="page-note">* ВСЕ ТОВАРЫ СЕРТИФИЦИРОВАНЫ ПО СТАНДАРТУ ГОСТ-2087-Ф «КИБЕРБЕЗОПАСНОСТЬ ДЛЯ ВСЕХ, КРОМЕ ВСЕХ».</p>
+</section>
+
+<!-- ============ ROUTE: DATANET ============ -->
+<section class="route" id="route-datanet">
+  <header class="page-head">
+    <h2 class="page-title glitch" data-text="ДАТАНЕТ // ЛЕНТА">ДАТАНЕТ // ЛЕНТА</h2>
+    <p class="page-sub">ТЕЛЕТЕКСТ-ТРАНСЛЯЦИЯ. СТР. 100. ОБНОВЛЯЕТСЯ, КОГДА ОБНОВЛЯЕТСЯ.</p>
+  </header>
+
+  <div class="teletext">
+    <div class="tt-head">
+      <span>ДАТАНЕТ-30</span><span>СТР.100</span><span id="tt-date">17.09.2087</span>
+    </div>
+
+    <article class="tt-article">
+      <div class="tt-meta"><span class="tt-tag">СРОЧНО</span> 17 СЕН 2087 // 03:12 МСК</div>
+      <h3>КОРПЫ ОБЪЯВИЛИ ЦЕНЫ НА ВОЗДУХ. ВОЗДУХ ПРОТИВ.</h3>
+      <div class="tt-cols">
+        <img class="tt-img" src="assets/news/city.jpg" alt="Неоновый город ночью">
+        <div>
+          <p>Тройка мегакорпов выставила тарифы на «атмосферный сервис» в закрытых секторах.
+          Цена вопроса — 2 кредита за кубометр. Общественность в лице профсоюза раннеров
+          «МИРОТВОРЦЫ» ответила коротко: «Попробуйте нас сперва найти».</p>
+          <p>По всему сектору 7 уже замечены самодельные фильтры марки «СВОБОДА-64». ВЕКТОР-9 производство не комментирует.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="tt-article">
+      <div class="tt-meta"><span class="tt-tag tag-green">ТЕХНО</span> 16 СЕН 2087 // 22:40 МСК</div>
+      <h3>ВЕКТОР-9 ПОКАЗАЛ ПРОТОТИП ДЕКИ VK-X. ПРЕССЕ ПОКАЗАЛИ ТОЛЬКО ТУМБЛЕР</h3>
+      <div class="tt-cols">
+        <img class="tt-img" src="assets/news/robot.jpg" alt="Прототип в лаборатории">
+        <div>
+          <p>В подземной лаборатории «ХАНГАР-8» инженеры ВЕКТОР-9 собрали прототип деки десятого
+          поколения. Журналистам продемонстрировали большой красный тумблер с табличкой
+          «НЕ НАЖИМАТЬ». Тумблер нажали 6 раз. Ничего не произошло. Пока что.</p>
+          <p>Серийный выпуск — «когда будет готово», заявил главный инженер и загадочно мигнул светодиодом.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="tt-article">
+      <div class="tt-meta"><span class="tt-tag tag-amber">ЭКОНОМИКА</span> 15 СЕН 2087 // 14:00 МСК</div>
+      <h3>РЫНОК ICE ВЫРОС НА 12%. АНАЛИТИКИ: «ЛЮДИ ВСЁ ЧАЩЕ ПРЯЧУТ. ЛЮДЕЙ ВСЁ ЧАЩЕ ИЩУТ»</h3>
+      <p>Корпоративный лёд дорожает: средний контракт на BLACK ICE — 2.4 млн кредитов.
+      ВЕКТОР-9 напоминает: лучший лёд — тот, который вы купили у нас, а лучший ледокол — тоже.</p>
+    </article>
+
+    <article class="tt-article">
+      <div class="tt-meta"><span class="tt-tag tag-red">ИНЦИДЕНТ</span> 14 СЕН 2087 // 05:55 МСК</div>
+      <h3>ДРОНЫ ПОЧТЫ УСТРОИЛИ СОВЕЩАНИЕ НА ПЛОЩАДИ СИНТЕЗА. ЦЕЛЬ НЕЯСНА</h3>
+      <p>300 почтовых дронов синхронно приземлились на площади, образовали правильную окружность
+      и 40 минут молчали, зловеще мигая. Затем разлетелись по адресам. Почтовая служба заявляет,
+      что «всё в рамках протокола». Протокол не предъявила.</p>
+    </article>
+
+    <article class="tt-article">
+      <div class="tt-meta"><span class="tt-tag tag-green">КУЛЬТУРА</span> 13 СЕН 2087 // 20:00 МСК</div>
+      <h3>В КЛУБЕ «ПРЕРЫВАТЕЛЬ» ОТКРЫЛСЯ СИНТВЕЙВ-МАРАФОН. 72 ЧАСА МУЗЫКИ. УШИ — ОТДЕЛЬНО</h3>
+      <p>Диджей-раннер VHS-GHOST крутит кассеты без перерыва. При входе выдают беруши,
+      стимпаки и прощальный взгляд. Выручка с марафона пойдёт на ремонт дек рабочим сектора 12.</p>
+    </article>
+
+    <div class="tt-foot">ДАЛЕЕ: СТР.101 — ГОРОСКОП ДЛЯ АНДРОИДОВ // СТР.102 — КУРСЫ ВАЛЮТ И ДУШ</div>
+  </div>
+</section>
+
+<!-- ============ ROUTE: TERMINAL ============ -->
+<section class="route" id="route-terminal">
+  <header class="page-head">
+    <h2 class="page-title glitch" data-text="ТЕРМИНАЛ // GUEST">ТЕРМИНАЛ // GUEST</h2>
+    <p class="page-sub">ГОСТЕВОЙ ДОСТУП. ВВЕДИ <code>help</code> — И ТЕБЕ ПОКАЖУТ ДВЕРЬ.</p>
+  </header>
+
+  <div class="terminal-wrap">
+    <div class="terminal-titlebar">
+      <span class="tt-dots"><i></i><i></i><i></i></span>
+      <span class="tt-name">VECTOR-9 SHELL v9.87 — /dev/ttyS0 — 9600 БОД</span>
+      <span class="tt-leds"><span class="led blink-fast"></span><span class="led led-red blink-slow"></span></span>
+    </div>
+    <div class="terminal" id="terminal">
+      <div id="term-output"></div>
+      <form id="term-form" autocomplete="off">
+        <span class="term-prompt">guest@vector-9:~$</span>
+        <input id="term-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Ввод команды">
+        <span class="term-caret"></span>
+      </form>
+    </div>
+    <div class="terminal-hint">↑↓ — история команд · <code>help</code> — список · <code>clear</code> — очистить</div>
+  </div>
+</section>
+
+<!-- ============ ROUTE: CORP ============ -->
+<section class="route" id="route-corp">
+  <header class="page-head">
+    <h2 class="page-title glitch" data-text="КОРП // ДОСЬЕ">КОРП // ДОСЬЕ</h2>
+    <p class="page-sub">УРОВЕНЬ ДОСТУПА: ОБЩЕСТВЕННЫЙ. ОСТАЛЬНОЕ ДОСЬЕ ХРАНИТСЯ ЗА 14 СТЕНАМИ ICE.</p>
+  </header>
+
+  <div class="corp-grid">
+    <div class="corp-main">
+      <h3>▙ МАНИФЕСТ</h3>
+      <p>В 1987 году один инженер, один паяльник и один неработающий ПК «Искра-1030» решили,
+      что будущее не будет ждать. Так появилась <b>ВЕКТОР-9</b> — корпорация, которая продаёт
+      инструменты для тех, кто не просит разрешения.</p>
+      <p>Мы не строим утопию. Мы строим <b>деки</b>. Утопию вы построите сами — если найдёте
+      правильный бэкдор.</p>
+
+      <h3>▙ ФАБРИКА «ХАНГАР-8»</h3>
+      <div class="corp-photo">
+        <img src="assets/about/factory.jpg" alt="Штаб-квартира ВЕКТОР-9 ночью" loading="lazy">
+        <div class="corp-photo-cap">РИС. 1 // ШТАБ-КВАРТИРА, БАШНЯ В-9. КАЖДЫЕ 40 МИНУТ РЕЗЕРВНЫЙ ГЕНЕРАТОР ДЕЛАЕТ СТРАШНЫЙ ЗВУК. ЭТО НОРМАЛЬНО.</div>
+      </div>
+
+      <h3>▙ ХРОНОЛОГИЯ</h3>
+      <ol class="timeline">
+        <li><b>1981</b> — Гараж №9. Первый самодельный терминал из телевизора «Электроника».</li>
+        <li><b>1984</b> — Дека VK-1. ОЗУ 64 Кб. Продано 3 штуки. Одну вернули. С горящими глазами.</li>
+        <li><b>1987</b> — Регистрация корпорации <b>ВЕКТОР-9</b>. 40 сотрудников, 1 кот, 0 стандартов.</li>
+        <li><b>1991</b> — Первый собственный ICE «МОЛНИЯ». Противники: недовольны. Их более нет.</li>
+        <li><b>2003</b> — Открыт отдел киберпротезирования. Очередь — до 2006 года.</li>
+        <li><b>2026</b> — Слияние с лабораторией «КАССЕТА». Аналоговый роудмап до конца века.</li>
+        <li><b>2087</b> — Сегодня. 14 млн дек в сети. 0 сожалений.</li>
+      </ol>
+    </div>
+
+    <aside class="corp-side">
+      <h3>▙ СОВЕТ ДИРЕКТОРОВ</h3>
+      <ul class="team-list">
+        <li><span class="team-handle">«ВЕКТОР» КИМ</span><em>Основатель, CEO. Не спит с 1994.</em></li>
+        <li><span class="team-handle">АЛЬФА-7</span><em>Совет директоров, ИИ. Голосует двумя третями.</em></li>
+        <li><span class="team-handle">РЕЙЯ МИЦУМОТО</span><em>Главный инженер дек. Собрала VK-X из честности.</em></li>
+        <li><span class="team-handle">ДОК «ГЛЮК» ПАВЛОВ</span><em>Безопасность. Видел вещи. Расскажет — за кредиты.</em></li>
+        <li><span class="team-handle">КОТ ВК-87</span><em>Главный по охране периметра. 6 струн, 9 жизней, 40 см.</em></li>
+      </ul>
+
+      <h3>▙ ОРГ. СХЕМА</h3>
+      <pre class="org-chart">
+        ВЕКТОР-9
+        └── CEO «ВЕКТОР» КИМ
+            ├── [ИНЖ] ДЕКИ
+            │   └── VK-СЕРИЯ
+            ├── [СЕК] ICE/ЛЕДОКОЛЫ
+            ├── [БИО] КИБЕРПРОТЕЗЫ
+            └── КОТ ВК-87 ──► ВСЕ</pre>
+
+      <div class="corp-facts">
+        <div><b>14 000 000</b><span>дек в сети</span></div>
+        <div><b>666</b><span>патентов</span></div>
+        <div><b>1</b><span>кот</span></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ ROUTE: CONTACT ============ -->
+<section class="route" id="route-contact">
+  <header class="page-head">
+    <h2 class="page-title glitch" data-text="СВЯЗЬ // UPLINK">СВЯЗЬ // UPLINK</h2>
+    <p class="page-sub">ГОЛОСОВОЙ ЯЩИК ЗАНЯТ. МОДЕМ СВОБОДЕН. ПЕРЕДАВАЙТЕ ПАКЕТ.</p>
+  </header>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-line"><span>МОДЕМ</span><b>+7 (095) 555-08-77</b></div>
+      <div class="contact-line"><span>ГОЛОС</span><b>+7 (095) 555-V9-V9</b></div>
+      <div class="contact-line"><span>ПОЧТА</span><b>guest@vector-9.net</b></div>
+      <div class="contact-line"><span>АДРЕС</span><b>НЕОНОВЫЙ КВАРТАЛ, БАШНЯ В-9, СЕКТОР 7, ЭТАЖ −8</b></div>
+      <div class="contact-line"><span>ЧАСЫ</span><b>00:00–23:59 МСК. КИБЕРПРОСТРАНСТВО НЕ СПИТ</b></div>
+      <pre class="contact-art" aria-hidden="true">
+   .-========-.
+   |  V-9 📡  |
+   '-========-'
+       |||
+   НАШ СИГНАЛ
+   УСЛЫШАТ ВСЕ</pre>
+    </div>
+
+    <form class="contact-form" id="contact-form">
+      <label>ПОЗЫВНОЙ / RUNNER
+        <input type="text" name="handle" placeholder="напр. НЕОН-ВОЛК" required>
+      </label>
+      <label>КАНАЛ (модем / e-mail)
+        <input type="text" name="channel" placeholder="напр. neon@wolf.net" required>
+      </label>
+      <label>ПАКЕТ ДАННЫХ
+        <textarea name="message" rows="5" placeholder="Опишите, что вам нужно. Без ВЕРХНЕГО РЕГИСТРА — у нас тоже сработает…" required></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">ПЕРЕДАТЬ ПАКЕТ ►►</button>
+      <pre class="contact-log" id="contact-log">ГОТОВ К ПЕРЕДАЧЕ. ЖДУ ВАШИХ СЛОВ.</pre>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ CART DRAWER ============ -->
+<aside class="cart-drawer" id="cart-drawer" aria-hidden="true">
+  <div class="cart-head">
+    <span>▙ ПАМЯТЬ ЗАКАЗОВ</span>
+    <button class="hud-btn" id="cart-close">[X] ЗАКРЫТЬ</button>
+  </div>
+  <ul class="cart-list" id="cart-list"></ul>
+  <div class="cart-total">ИТОГО: <b id="cart-total">0</b> кр.</div>
+  <button class="btn btn-primary" id="cart-checkout">ОФОРМИТЬ ЗАКАЗ ►►</button>
+  <pre class="cart-log" id="cart-log">КАССЕТА ЗАКАЗОВ ПУСТА.</pre>
+</aside>
+
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast"></div>
+
+<!-- ============ STATUS BAR ============ -->
+<footer class="statusbar">
+  <span class="sb-item">READY.</span>
+  <span class="sb-item sb-blink">▮</span>
+  <span class="sb-item">ДАТАНЕТ: <b class="sb-ok">CONNECTED</b></span>
+  <span class="sb-item">9600 БОД</span>
+  <span class="sb-item sb-grow">© 2087 ВЕКТОР-9 SYSTEMS. ВСЕ ПРАВА ЗАЩИЩЕНЫ СЕМНАДЦАТЬЮ СЛОЯМИ ICE.</span>
+  <span class="sb-item" id="sb-random">ICE: НОРМА</span>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
